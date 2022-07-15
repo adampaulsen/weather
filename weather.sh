@@ -2,6 +2,10 @@
 
 APIKEY={APIKEY}
 #Replace {APIKEY} with your own from https://www.geoapify.com/
+if [ $APIKEY == {APIKEY} ]; then
+	echo "No API key found. Visit https://www.geoapify.com to get an API key"
+	exit
+fi
 if [ ! $# == 1 ]; then
   echo "Usage: $0 ZIPCODE, eg. $0 95747"
   exit
