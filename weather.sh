@@ -16,6 +16,5 @@ lon=$(curl -s "$url" | jq -r '.features[].properties.lon')
 lat4=$(printf "%8.3f" "$lat")
 lon4=$(printf "%8.3f" "$lon")
 latlon=$(echo $lat4 | xargs),$(echo $lon4 | xargs)
-pointurl="https://api.weather.gov/points/$latlon"
-point=$(curl -s "$pointurl" | jq -r '.properties["forecast"]')
+point=$(curl -s "https://api.weather.gov/points/$latlon" | jq -r '.properties["forecast"]')
 curl -s "${point}" | jq -r '.properties.periods[] | "\(.name):\(.temperature):\(.shortForecast)"' | awk -F':' '{ printf "%-16s  %d  %-60s\n", $1, $2, $3 }'
